@@ -37,4 +37,4 @@ sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemo
 
 
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
-sudo ufw enable
+sudo ufw --force enable 
