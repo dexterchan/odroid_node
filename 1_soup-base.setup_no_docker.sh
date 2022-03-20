@@ -24,7 +24,7 @@ fi
 sudo apt-get update -y
 sudo apt-get upgrade -y
 
-sudo apt install -y ufw avahi-daemon curl
+sudo apt install -y ufw avahi-daemon curl unzip
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -34,3 +34,7 @@ sudo usermod -a -G docker $APPUSER
 sudo usermod -a -G sudo $APPUSER
 #Amend /etc/avahi/avahi-daemon.conf
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
+
+
+sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
+sudo ufw enable

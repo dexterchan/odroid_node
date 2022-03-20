@@ -4,3 +4,4 @@ cp ~/.ssh/wpa_supplicant.conf /Volumes/boot
 cp 1_soup-base.setup_no_docker.sh /Volumes/boot
 cp install-docker.sh /Volumes/boot
 cp install-k3s.sh /Volumes/boot
+cp install-postgre.sh /Volumes/boot
