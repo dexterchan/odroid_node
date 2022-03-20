@@ -29,5 +29,8 @@ sudo apt install -y ufw avahi-daemon curl
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh
 echo 'alias temp="cat /sys/devices/virtual/thermal/thermal_zone0/temp"' >> ~/.bashrc 
+echo 'alias temp="cat /sys/devices/virtual/thermal/thermal_zone0/temp"' >> /home/${APPUSER}/.bashrc 
+sudo usermod -a -G docker $APPUSER
+sudo usermod -a -G sudo $APPUSER
 #Amend /etc/avahi/avahi-daemon.conf
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
