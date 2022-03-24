@@ -21,8 +21,9 @@ useradd --system --home-dir $HOMEDIR --uid=9999 --gid=${APPUSER} ${APPUSER}
 if [ -z "$host_name" ]; then
     host_name="ant-node"
 fi
-sudo apt-get update -y
-sudo apt-get upgrade -y
+
+sudo apt update -y
+sudo apt full-upgrade -y
 
 sudo apt install -y ufw avahi-daemon curl unzip
 
