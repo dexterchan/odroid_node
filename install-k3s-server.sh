@@ -40,6 +40,7 @@ sudo usermod -a -G ${k3s_grp} $USER
 sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
 sudo sudo chmod 770 /etc/rancher/k3s/k3s.yaml
 
+#Without this, you got Error: Kubernetes cluster unreachable
 echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 
 #SMB driver for k3s
