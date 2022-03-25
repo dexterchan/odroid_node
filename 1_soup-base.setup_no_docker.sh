@@ -16,7 +16,7 @@ HOMEDIR=/home/${APPUSER}
 mkdir -p ${HOMEDIR}
 groupadd --system --gid=9999  ${APPUSER} 
 useradd --system --home-dir $HOMEDIR --uid=9999 --gid=${APPUSER} ${APPUSER}
-chmod -R ${APPUSER}:${APPUSER} $HOMEDIR
+chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
 if [ -z "$host_name" ]; then
     host_name="ant-node"
