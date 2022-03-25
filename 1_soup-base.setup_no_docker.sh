@@ -25,7 +25,7 @@ fi
 sudo apt update -y
 sudo apt full-upgrade -y
 
-sudo apt install -y ufw avahi-daemon curl unzip
+sudo apt install -y ufw avahi-daemon curl unzip nfs-common cifs-utils
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh
