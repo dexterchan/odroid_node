@@ -9,10 +9,10 @@ sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
 
 
 curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-sudo apt-get install apt-transport-https --yes
+sudo apt-get install -y apt-transport-https 
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update
-sudo apt-get install helm
+sudo apt-get update -y
+sudo apt-get install -y helm
 
 conn_str=$(sudo sh /media/boot/postgredb.connection_string.sh)
 SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
@@ -35,7 +35,8 @@ k3s kubectl get node
 #[INFO]  systemd: Enabling k3s unit
 
 k3s_grp=k3s
-groupadd --system --gid=9999  ${k3s_grp}
+sudo groupadd --system --gid=9999  ${k3s_grp}
+sleep 10
 sudo usermod -a -G ${k3s_grp} $USER
 sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
 sudo sudo chmod 770 /etc/rancher/k3s/k3s.yaml
@@ -46,3 +47,4 @@ echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 #SMB driver for k3s
 #https://github.com/kubernetes-csi/csi-driver-smb/tree/master/charts
 
+echo uninstall with '/usr/local/bin/k3s-uninstall.sh'

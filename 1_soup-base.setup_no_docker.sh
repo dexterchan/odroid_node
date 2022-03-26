@@ -21,11 +21,11 @@ chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 if [ -z "$host_name" ]; then
     host_name="ant-node"
 fi
-
+echo $host_name | sudo tee /etc/hostname
 sudo apt update -y
 sudo apt full-upgrade -y
 
-sudo apt install -y ufw avahi-daemon curl unzip nfs-common cifs-utils
+sudo apt install -y ufw avahi-daemon curl unzip nfs-common cifs-utils telnet
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh
