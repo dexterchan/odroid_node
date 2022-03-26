@@ -35,9 +35,9 @@ k3s kubectl get node
 #[INFO]  systemd: Enabling k3s unit
 
 k3s_grp=k3s
-sudo groupadd --system --gid=9999  ${k3s_grp}
-sleep 10
-sudo usermod -a -G ${k3s_grp} $USER
+sudo groupadd --system   ${k3s_grp}
+
+sudo usermod -a -G ${k3s_grp} droid
 sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
 sudo sudo chmod 770 /etc/rancher/k3s/k3s.yaml
 
@@ -46,5 +46,9 @@ echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 
 #SMB driver for k3s
 #https://github.com/kubernetes-csi/csi-driver-smb/tree/master/charts
-
+#helm repo add csi-driver-smb https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
+#helm install csi-driver-smb csi-driver-smb/csi-driver-smb --namespace kube-system --version v1.5.0
+#example
+#https://github.com/kubernetes-csi/csi-driver-smb/blob/master/deploy/example/e2e_usage.md
 echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
+

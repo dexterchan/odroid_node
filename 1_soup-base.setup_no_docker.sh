@@ -16,7 +16,7 @@ HOMEDIR=/home/${APPUSER}
 mkdir -p ${HOMEDIR}
 groupadd --system --gid=9999  ${APPUSER} 
 useradd --system --home-dir $HOMEDIR --uid=9999 --gid=${APPUSER} ${APPUSER}
-chown -R ${APPUSER}:${APPUSER} $HOMEDIR
+
 
 if [ -z "$host_name" ]; then
     host_name="ant-node"
@@ -35,7 +35,7 @@ sudo usermod -a -G docker $APPUSER
 sudo usermod -a -G sudo $APPUSER
 #Amend /etc/avahi/avahi-daemon.conf
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
-
+sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
 sudo ufw --force enable 
