@@ -1,5 +1,7 @@
 #!/bin/bash
 host_name=$1
+sudo apt update -y
+sudo apt --fix-broken install -y
 
 sudo sed -i 's/# en_US.UTF-8/en_US.UTF-8/g' /etc/locale.gen
 sudo locale-gen
