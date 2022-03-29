@@ -39,8 +39,7 @@ sudo groupadd --system   ${k3s_grp}
 
 sudo usermod -a -G ${k3s_grp} droid
 sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
-sudo sudo chmod 770 /etc/rancher/k3s/k3s.yaml
-
+sudo chmod 660 /etc/rancher/k3s/k3s.yaml
 #Without this, you got Error: Kubernetes cluster unreachable
 echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 
