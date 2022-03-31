@@ -1,6 +1,11 @@
 
 #!/bin/sh
 
+cat << EOF | sudo tee -a /etc/fstab
+/dev/sda2  /mnt/storj ext4 defaults 0 1
+EOF
+sudo mount -a
+
 curl -L https://github.com/storj/storj/releases/latest/download/identity_linux_arm.zip -o identity_linux_arm.zip
 unzip -o identity_linux_arm.zip
 chmod +x identity
@@ -32,5 +37,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable noip2
 sudo systemctl start noip2
 
+echo update the config with /usr/local/bin/noip2 -C
 
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 14002
+sudo ufw allow 28967

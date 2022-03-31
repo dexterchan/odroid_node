@@ -6,3 +6,4 @@ cp 1_soup-base.setup_no_docker.sh /Volumes/boot
 cp install-docker.sh /Volumes/boot
 cp install-k3s-server.sh /Volumes/boot
 cp install-postgre.sh /Volumes/boot
+cp install-nfs.sh /Volumes/boot
