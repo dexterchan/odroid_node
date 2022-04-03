@@ -39,5 +39,6 @@ sudo usermod -a -G sudo $APPUSER
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
 sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
+sudo ufw --force default deny incoming
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
 sudo ufw --force enable 
