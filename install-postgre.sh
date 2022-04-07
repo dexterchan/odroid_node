@@ -6,7 +6,7 @@ USERNAME=droid
 sudo usermod -aG postgres $USERNAME
 
 sudo -u postgres createuser $USERNAME
-DBNAME=$USERNAME
+DBNAME=k3scluster
 sudo -u postgres createdb -O $USERNAME $DBNAME
 
 conf_file=$(sudo find / -name "postgresql.conf" | grep etc)

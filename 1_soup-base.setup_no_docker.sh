@@ -23,7 +23,7 @@ useradd --system --home-dir $HOMEDIR --uid=9999 --gid=${APPUSER} ${APPUSER}
 if [ -z "$host_name" ]; then
     host_name="ant-node"
 fi
-echo $host_name | sudo tee /etc/hostname
+#echo $host_name | sudo tee /etc/hostname
 sudo apt update -y
 sudo apt full-upgrade -y
 
