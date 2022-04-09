@@ -6,7 +6,7 @@ cp ~/.ssh/wpa_supplicant.conf $tmpfolder
 cp ~/.ssh/postgredb.connection_string.sh $tmpfolder
 cp ~/.ssh/surfshark.credential  $tmpfolder
 #echo cgroup_memory=1 cgroup_enable=memory $(cat $tmpfolder/cmdline.txt ) > $tmpfolder/cmdline.txt
-cp 1_soup-base.setup_no_docker.sh $tmpfolder
+cp m1_1_soup-base.setup_no_docker.sh $tmpfolder
 cp install-docker.sh $tmpfolder
 cp install-k3s-server.sh $tmpfolder
 cp install-postgre.sh $tmpfolder
