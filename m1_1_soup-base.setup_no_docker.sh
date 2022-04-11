@@ -30,8 +30,9 @@ cat << EOF | sudo tee -a /etc/hosts
 EOF
 sudo apt update -y
 sudo apt full-upgrade -y
-
-sudo apt install -y ufw avahi-daemon curl unzip nfs-common cifs-utils telnet dnsutils grub2-common
+#As of APR2022
+#Odroid Ubuntu failed to have complete iptable to support ufw
+sudo apt install -y  avahi-daemon curl unzip nfs-common cifs-utils telnet dnsutils grub2-common
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh

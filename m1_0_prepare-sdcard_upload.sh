@@ -9,6 +9,7 @@ cp ~/.ssh/surfshark.credential  $tmpfolder
 cp m1_1_soup-base.setup_no_docker.sh $tmpfolder
 cp install-docker.sh $tmpfolder
 cp install-k3s-server.sh $tmpfolder
+cp install-k3s-agent.sh $tmpfolder
 cp install-postgre.sh $tmpfolder
 cp install-nfs-server.sh $tmpfolder
 
