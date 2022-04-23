@@ -27,3 +27,6 @@ curl -sfL https://get.k3s.io | sh -s - agent \
                                 #--node-taint workload=highdemand:NoExecute \
 
 echo uninstall with '/usr/local/bin/k3s-agent-uninstall.sh'
+
+node_name=$(cat /etc/hostname)
+kubectl labels nodes ${node_name} type=compute

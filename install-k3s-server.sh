@@ -51,6 +51,11 @@ echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 #https://github.com/kubernetes-csi/csi-driver-smb/blob/master/deploy/example/e2e_usage.md
 echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 
+# nginx controller replacement
+# https://www.suse.com/support/kb/doc/?id=000020082
+
 # opening port for ingress
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
+
+kubectl labels nodes server type=driver
