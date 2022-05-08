@@ -12,6 +12,7 @@ cp install-k3s-server.sh $tmpfolder
 cp install-k3s-agent.sh $tmpfolder
 cp install-postgre.sh $tmpfolder
 cp install-nfs-server.sh $tmpfolder
+cp install-golang.sh $tmpfolder
 
 curpath=$(pwd)
 cd $roottmpfolder
