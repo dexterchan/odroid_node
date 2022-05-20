@@ -44,6 +44,21 @@ sudo usermod -a -G sudo $APPUSER
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
 sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
+
+# Known issue of nftables, need to revert back to iptables-legacy
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+sudo update-alternatives --set arptables /usr/sbin/arptables-legacy
+sudo update-alternatives --set ebtables /usr/sbin/ebtables-legacy
+
+sudo ln -s /etc/alternatives/iptables /sbin/iptables
+sudo ln -s /etc/alternatives/iptables-save /sbin/iptables-save
+sudo ln -s /etc/alternatives/iptables-restore /sbin/iptables-restore
+sudo ln -s /etc/alternatives/ip6tables /sbin/ip6tables
+sudo ln -s /etc/alternatives/ip6tables-save /sbin/ip6tables-save
+sudo ln -s /etc/alternatives/ip6tables-restore /sbin/ip6tables-restore
+
+sudo apt-get install ufw -y
 #Disable ipv6 as the current version iptableV6 not working 
 sudo sed -i 's/IPV6=yes/IPV6=no/g' /etc/default/ufw
 
@@ -53,3 +68,4 @@ sudo ufw deny from 192.168.1.3 to any
 sudo ufw deny from 192.168.1.17 to any
 sudo ufw --force default deny incoming
 sudo ufw --force enable 
+

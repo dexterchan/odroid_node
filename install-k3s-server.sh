@@ -7,14 +7,15 @@ sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
 
 
-
+sudo apt-get install -y curl
 curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-sudo apt-get install -y apt-transport-https 
+sudo apt-get install -y apt-transport-https
 echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 sudo apt-get update -y
 sudo apt-get install -y helm
 
-conn_str=$(sudo sh /media/boot/postgredb.connection_string.sh)
+
+conn_str=$(sudo sh postgredb.connection_string.sh)
 SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
@@ -36,6 +37,7 @@ k3s kubectl get node
 
 k3s_grp=k3s
 sudo groupadd --system   ${k3s_grp}
+sudo usermod -a -G ${k3s_grp} odroid
 
 sudo usermod -a -G ${k3s_grp} droid
 sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
@@ -58,4 +60,4 @@ echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
 
-kubectl labels nodes server type=driver
+kubectl label nodes $(hostname) type=driver
