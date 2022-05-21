@@ -20,11 +20,12 @@ SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
 SECRET=$(cat /media/boot/k3s_secret_token)
-curl -sfL https://get.k3s.io | sh -s - server \
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s - server \
   --token=$SECRET \
   --datastore-endpoint="${conn_str}"
 
 echo on
+
 
 # Reference from https://rancher.com/docs/k3s/latest/en/quick-start/
 # curl -sfL https://get.k3s.io | sh -
@@ -55,7 +56,7 @@ echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
 echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 
 # nginx controller replacement
-# https://www.suse.com/support/kb/doc/?id=000020082
+# https://kubernetes.github.io/ingress-nginx/deploy/
 
 # opening port for ingress
 sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
