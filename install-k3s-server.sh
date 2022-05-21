@@ -19,6 +19,7 @@ conn_str=$(sudo sh postgredb.connection_string.sh)
 SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
+SECRET=$(cat /media/boot/k3s_secret_token)
 curl -sfL https://get.k3s.io | sh -s - server \
   --token=$SECRET \
   --datastore-endpoint="${conn_str}"
