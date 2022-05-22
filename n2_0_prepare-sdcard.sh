@@ -10,3 +10,4 @@ cp install-postgre.sh /Volumes/boot
 cp install-nfs-server.sh /Volumes/boot
 cp install-k3s-agent.sh /Volumes/boot
 cp install-golang.sh /Volumes/boot
+cp install-ssmagent.sh /Volumes/boot
