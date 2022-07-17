@@ -51,3 +51,4 @@ sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 # sudo ufw deny from 192.168.1.17 to any
 # sudo ufw --force default deny incoming
 # sudo ufw --force enable 
+sudo reboot now

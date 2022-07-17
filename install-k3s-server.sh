@@ -20,7 +20,7 @@ SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
 SECRET=$(cat /media/boot/k3s_secret_token)
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s - server \
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--no-deploy traefik --cluster-cidr=172.16.0.0/16" sh -s - server \
   --token=$SECRET \
   --datastore-endpoint="${conn_str}"
 
