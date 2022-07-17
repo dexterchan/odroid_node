@@ -1,10 +1,11 @@
 #!/bin/sh
+#Reference calico https://projectcalico.docs.tigera.io/master/getting-started/kubernetes/k3s/
 
 #unblock the ports in firewall
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
-sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
+# sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
 
 
 sudo apt-get install -y curl
@@ -20,7 +21,7 @@ SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
 SECRET=$(cat /media/boot/k3s_secret_token)
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--no-deploy traefik" sh -s - server \
+curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--flannel-backend=none --cluster-cidr=172.16.0.0/16 --disable-network-policy --disable=traefik" sh -s - server \
   --token=$SECRET \
   --datastore-endpoint="${conn_str}"
 
@@ -58,8 +59,16 @@ echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 # nginx controller replacement
 # https://kubernetes.github.io/ingress-nginx/deploy/
 
+#calico installation
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/master/manifests/tigera-operator.yaml
+
+pushd /tmp
+wget https://raw.githubusercontent.com/projectcalico/calico/master/manifests/custom-resources.yaml
+sed -i "s|192.168.0.0/16|172.16.0.0/16|g" custom-resources.yaml 
+kubectl create -f custom-resources.yaml
+popd
 # opening port for ingress
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
 
 kubectl label nodes $(hostname) type=driver

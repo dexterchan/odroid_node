@@ -1,8 +1,8 @@
 #!/bin/sh
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
-sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
+# sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
 
 
 # install k3s service
