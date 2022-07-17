@@ -33,7 +33,7 @@ EOF
 sudo apt update -y
 sudo apt full-upgrade -y
 
-sudo apt install -y ufw avahi-daemon curl unzip nfs-common cifs-utils telnet dnsutils
+sudo apt install -y  avahi-daemon curl unzip nfs-common cifs-utils telnet dnsutils
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -46,8 +46,8 @@ sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemo
 sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
 
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
-sudo ufw deny from 192.168.1.3 to any
-sudo ufw deny from 192.168.1.17 to any
-sudo ufw --force default deny incoming
-sudo ufw --force enable 
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
+# #sudo ufw deny from 192.168.1.3 to any
+# #sudo ufw deny from 192.168.1.17 to any
+# #sudo ufw --force default deny incoming
+# sudo ufw --force disable 
