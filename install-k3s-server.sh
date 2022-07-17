@@ -1,10 +1,10 @@
 #!/bin/sh
 
 #unblock the ports in firewall
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
-sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 6443
+# sudo ufw allow from 192.168.1.0/24 proto udp to any port 8472
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 10250
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 2379:2380
 
 
 sudo apt-get install -y curl
@@ -59,7 +59,7 @@ echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 # https://kubernetes.github.io/ingress-nginx/deploy/
 
 # opening port for ingress
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
-sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
+# sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
 
 kubectl label nodes $(hostname) type=driver
