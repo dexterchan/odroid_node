@@ -63,3 +63,4 @@ echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 # sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
 
 kubectl label nodes $(hostname) type=driver
+kubectl taint nodes $(hostname) node-role.kubernetes.io/control-plane:NoSchedule
