@@ -32,7 +32,7 @@ sudo apt update -y
 sudo apt full-upgrade -y
 #As of APR2022
 #Odroid Ubuntu failed to have complete iptable to support ufw
-sudo apt install -y  avahi-daemon curl unzip nfs-common cifs-utils telnet dnsutils grub2-common resolvconf
+sudo apt install -y  avahi-daemon curl unzip nfs-common resolvconf
 
 cd /tmp
 curl -fsSL https://get.docker.com -o get-docker.sh

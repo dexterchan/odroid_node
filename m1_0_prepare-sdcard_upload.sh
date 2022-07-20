@@ -14,6 +14,7 @@ cp install-postgre.sh $tmpfolder
 cp install-nfs-server.sh $tmpfolder
 cp install-golang.sh $tmpfolder
 cp install-ssmagent.sh $tmpfolder
+cp m1_1_soup-base.setup_simple.sh $tmpfolder
 
 curpath=$(pwd)
 cd $roottmpfolder
