@@ -57,10 +57,52 @@ echo uninstall with '/usr/local/bin/k3s-uninstall.sh'
 
 # nginx controller replacement
 # https://kubernetes.github.io/ingress-nginx/deploy/
-
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+  
 # opening port for ingress
 # sudo ufw allow from 192.168.1.0/24 proto tcp to any port 80
 # sudo ufw allow from 192.168.1.0/24 proto tcp to any port 443
 
 kubectl label nodes $(hostname) type=driver
 kubectl taint nodes $(hostname) node-role.kubernetes.io/control-plane:NoSchedule
+
+#An example NGINX Ingress that makes use of the controller:
+#   apiVersion: networking.k8s.io/v1
+#   kind: Ingress
+#   metadata:
+#     name: example
+#     namespace: foo
+#   spec:
+#     ingressClassName: nginx
+#     rules:
+#       - host: www.example.com
+#         http:
+#           paths:
+#             - pathType: Prefix
+#               backend:
+#                 service:
+#                   name: exampleService
+#                   port:
+#                     number: 80
+#               path: /
+#     # This section is only required if TLS is to be enabled for the Ingress
+#     tls:
+#       - hosts:
+#         - www.example.com
+#         secretName: example-tls
+
+# If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+#   apiVersion: v1
+#   kind: Secret
+#   metadata:
+#     name: example-tls
+#     namespace: foo
+#   data:
+#     tls.crt: <base64 encoded cert>
+#     tls.key: <base64 encoded key>
+#   type: kubernetes.io/tls
+
+
