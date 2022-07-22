@@ -45,7 +45,7 @@ sudo usermod -a -G sudo $APPUSER
 sudo sed -i 's/#host-name=foo/host-name='${host_name}'/g' /etc/avahi/avahi-daemon.conf
 sudo chown -R ${APPUSER}:${APPUSER} $HOMEDIR
 
-
+sh ./install_swap_drive.sh
 # sudo ufw allow from 192.168.1.0/24 proto tcp to any port 22
 # sudo ufw deny from 192.168.1.3 to any
 # sudo ufw deny from 192.168.1.17 to any
