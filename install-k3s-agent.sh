@@ -22,8 +22,8 @@ echo "Got master server: ${server_ipaddress}"
 # curl -sfL https://get.k3s.io | K3S_URL=https://${server_ipaddress}:6443 \
 #                                K3S_TOKEN=$SECRET sh -
 
-
-curl -sfL https://get.k3s.io | sh -s - agent \
+K3S_VERSION=v1.23.9+k3s1
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="$K3S_VERSION" sh -s - agent \
                                 --token $SECRET \
                                 --server https://${server_ipaddress}:6443 \
                                 --log /var/log/k3_agent.log \

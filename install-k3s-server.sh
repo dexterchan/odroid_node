@@ -20,7 +20,8 @@ SECRET=$(date +%s | sha256sum | base64 | head -c 32 )
 echo off
 echo $SECRET | sudo tee /media/boot/k3s_secret_token
 SECRET=$(cat /media/boot/k3s_secret_token)
-curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--no-deploy traefik --cluster-cidr=172.16.0.0/16" sh -s - server \
+K3S_VERSION=v1.23.9+k3s1
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="$K3S_VERSION" K3S_KUBECONFIG_MODE="644" INSTALL_K3S_EXEC="--no-deploy traefik --cluster-cidr=172.16.0.0/16" sh -s - server \
   --token=$SECRET \
   --datastore-endpoint="${conn_str}"
 
@@ -46,7 +47,7 @@ sudo chgrp ${k3s_grp} /etc/rancher/k3s/k3s.yaml
 sudo chmod 660 /etc/rancher/k3s/k3s.yaml
 #Without this, you got Error: Kubernetes cluster unreachable
 echo export KUBECONFIG=/etc/rancher/k3s/k3s.yaml >> ~/.bashrc
-
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 #SMB driver for k3s
 #https://github.com/kubernetes-csi/csi-driver-smb/tree/master/charts
 #helm repo add csi-driver-smb https://raw.githubusercontent.com/kubernetes-csi/csi-driver-smb/master/charts
